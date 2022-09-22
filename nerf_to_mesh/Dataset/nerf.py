@@ -9,7 +9,7 @@ import numpy as np
 
 from render import util
 
-from .dataset import Dataset
+from dataset.dataset import Dataset
 
 ###############################################################################
 # NERF image based dataset (synthetic)
@@ -39,8 +39,7 @@ class DatasetNERF(Dataset):
         self.resolution = _load_img(os.path.join(self.base_dir, self.cfg['frames'][0]['file_path'])).shape[0:2]
         self.aspect = self.resolution[1] / self.resolution[0]
 
-        if self.FLAGS.local_rank == 0:
-            print("DatasetNERF: %d images with shape [%d, %d]" % (self.n_images, self.resolution[0], self.resolution[1]))
+        print("DatasetNERF: %d images with shape [%d, %d]" % (self.n_images, self.resolution[0], self.resolution[1]))
 
         # Pre-load from disc to avoid slow png parsing
         if self.FLAGS.pre_load:

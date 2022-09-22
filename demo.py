@@ -19,39 +19,7 @@ from nerf_to_mesh.Config.config import getFLAGS
 
 from nerf_to_mesh.Dataset.nerf import DatasetNERF
 
-
-class Trainer(torch.nn.Module):
-
-    def __init__(self, glctx, geometry, lgt, mat, optimize_geometry,
-                 optimize_light, image_loss_fn, FLAGS):
-        super(Trainer, self).__init__()
-
-        self.glctx = glctx
-        self.geometry = geometry
-        self.light = lgt
-        self.material = mat
-        self.optimize_geometry = optimize_geometry
-        self.optimize_light = optimize_light
-        self.image_loss_fn = image_loss_fn
-        self.FLAGS = FLAGS
-
-        if not self.optimize_light:
-            with torch.no_grad():
-                self.light.build_mips()
-
-        self.params = list(self.material.parameters())
-        self.params += list(self.light.parameters()) if optimize_light else []
-        self.geo_params = list(
-            self.geometry.parameters()) if optimize_geometry else []
-
-    def forward(self, target, it):
-        if self.optimize_light:
-            self.light.build_mips()
-            if self.FLAGS.camera_space_light:
-                self.light.xfm(target['mv'])
-
-        return self.geometry.tick(self.glctx, target, self.light,
-                                  self.material, self.image_loss_fn, it)
+from nerf_to_mesh.Module.trainer import Trainer
 
 
 def optimize_mesh(glctx,
@@ -208,32 +176,12 @@ if __name__ == "__main__":
 
     FLAGS.ref_mesh = "/home/chli/chLi/NeRF/ustc_niu"
     FLAGS.train_res = [1280, 720]
-
-    FLAGS.random_textures = True
     FLAGS.iter = 5000
     FLAGS.save_interval = 100
-    FLAGS.texture_res = [2048, 2048]
-    FLAGS.batch = 1
     FLAGS.learning_rate = [0.03, 0.01]
-    FLAGS.ks_min = [0, 0.25, 0]
-    FLAGS.dmtet_grid = 128
-    FLAGS.mesh_scale = 2.3
-    FLAGS.laplace_scale = 3000
-    FLAGS.display = [{
-        "latlong": True
-    }, {
-        "bsdf": "kd"
-    }, {
-        "bsdf": "ks"
-    }, {
-        "bsdf": "normal"
-    }]
-    FLAGS.layers = 8
-    FLAGS.background = "white"
     FLAGS.out_dir = "./out/ustc_niu/"
 
     FLAGS.display_res = FLAGS.train_res
-
     os.makedirs(FLAGS.out_dir, exist_ok=True)
 
     glctx = dr.RasterizeGLContext()

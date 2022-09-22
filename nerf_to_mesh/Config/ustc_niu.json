@@ -15,5 +15,5 @@
     "layers": 8,
     "background": "white",
     "validate": false,
-    "out_dir": "ustc_niu"
+    "out_dir": "./out/ustc_niu/"
 }

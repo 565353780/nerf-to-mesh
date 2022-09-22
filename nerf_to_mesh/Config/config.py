@@ -48,6 +48,22 @@ def getFLAGS():
     FLAGS.nrm_max = [1.0, 1.0, 1.0]
     FLAGS.cam_near_far = [0.1, 1000.0]
     FLAGS.learn_light = True
-    FLAGS.multi_gpu = False
-    FLAGS.local_rank = 0
+    FLAGS.random_textures = True
+    FLAGS.display = [{
+        "latlong": True
+    }, {
+        "bsdf": "kd"
+    }, {
+        "bsdf": "ks"
+    }, {
+        "bsdf": "normal"
+    }]
+    FLAGS.background = "white"
+    FLAGS.texture_res = [2048, 2048]
+    FLAGS.batch = 1
+    FLAGS.ks_min = [0, 0.25, 0]
+    FLAGS.dmtet_grid = 128
+    FLAGS.mesh_scale = 2.3
+    FLAGS.laplace_scale = 3000
+    FLAGS.layers = 8
     return FLAGS

@@ -17,7 +17,7 @@ conda activate dmodel
 ## Run
 
 ```bash
-./demo.py --config ./nerf_to_mesh/Config/ustc_niu.json
+python demo.py
 ```
 
 ## Enjoy it~

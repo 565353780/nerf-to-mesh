@@ -188,14 +188,13 @@ if __name__ == "__main__":
 
     assert os.path.isdir(FLAGS.ref_mesh)
     assert os.path.isfile(os.path.join(FLAGS.ref_mesh,
-                                       'transforms_train.json'))
-    assert os.path.isfile(os.path.join(FLAGS.ref_mesh, 'transforms_test.json'))
+                                       'transform.json'))
     dataset_train = DatasetNERF(os.path.join(FLAGS.ref_mesh,
-                                             'transforms_train.json'),
+                                             'transform.json'),
                                 FLAGS,
                                 examples=(FLAGS.iter + 1) * FLAGS.batch)
     dataset_validate = DatasetNERF(
-        os.path.join(FLAGS.ref_mesh, 'transforms_test.json'), FLAGS)
+        os.path.join(FLAGS.ref_mesh, 'transform.json'), FLAGS)
 
     lgt = light.create_trainable_env_rnd(512, scale=0.0, bias=0.5)
 

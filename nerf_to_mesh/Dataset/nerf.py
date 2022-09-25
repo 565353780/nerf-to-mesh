@@ -36,7 +36,7 @@ class DatasetNERF(Dataset):
         valid_frame_dict_list = []
         for frame_dict in self.cfg['frames']:
             frame_file_path = frame_dict['file_path']
-            if not os.path.exists(frame_file_path):
+            if not os.path.exists(os.path.join(self.base_dir, frame_file_path)):
                 continue
             valid_frame_dict_list.append(frame_dict)
         self.cfg['frames'] = valid_frame_dict_list

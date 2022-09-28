@@ -15,7 +15,7 @@ from geometry.dmtet import DMTetGeometry
 from geometry.dlmesh import DLMesh
 from train import createLoss, prepare_batch, validate_itr, initial_guess_material, xatlas_uvmap
 
-from nerf_to_mesh.Config.nvdiffrecon.config import getFLAGS
+from nerf_to_mesh.Config.config import getFLAGS
 
 from nerf_to_mesh.Dataset.nerf import DatasetNERF
 

@@ -1,10 +1,4 @@
-# NeRF To Mesh
-
-## Source
-
-```bash
-https://github.com/NVlabs/nvdiffrec
-```
+# NVDiffRec Manage
 
 ## Install
 

@@ -15,11 +15,11 @@ from geometry.dmtet import DMTetGeometry
 from geometry.dlmesh import DLMesh
 from train import createLoss, prepare_batch, validate_itr, initial_guess_material, xatlas_uvmap
 
-from nerf_to_mesh.Config.config import getFLAGS
+from nvdiffrec_manage.Config.config import getFLAGS
 
-from nerf_to_mesh.Dataset.nerf import DatasetNERF
+from nvdiffrec_manage.Dataset.nerf import DatasetNERF
 
-from nerf_to_mesh.Module.trainer import Trainer
+from nvdiffrec_manage.Module.trainer import Trainer
 
 
 def optimize_mesh(glctx,
@@ -174,12 +174,12 @@ def optimize_mesh(glctx,
 def demo():
     FLAGS = getFLAGS()
 
-    FLAGS.ref_mesh = "/home/chli/chLi/NeRF/ustc_niu"
+    FLAGS.ref_mesh = "/home/chli/chLi/NeRF/ustc_niu_merge_10"
     FLAGS.train_res = [1280, 720]
     FLAGS.iter = 5000
     FLAGS.save_interval = 100
     FLAGS.learning_rate = [0.03, 0.01]
-    FLAGS.out_dir = "./out/ustc_niu/"
+    FLAGS.out_dir = "./out/ustc_niu_merge_10/"
 
     FLAGS.display_res = FLAGS.train_res
     os.makedirs(FLAGS.out_dir, exist_ok=True)
